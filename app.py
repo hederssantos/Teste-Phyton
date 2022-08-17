@@ -1,33 +1,28 @@
-from flask import Flask
+from flask import Flask, render_template
+from datetime import datetime
 
 app = Flask("hello")
+posts = [
+{
+    "title": " Meu primeiro post",
+    "body": "Esse post é o primeiro do blog",
+    "author": "Danilo de Souza Miguel",
+    "created": datetime(2022,8,17)
+},
+{
+    "title": " Meu segundo post",
+    "body": "Esse post é o segundo do blog",
+    "author": "Raiane Caroline",
+    "created": datetime(2022,8,17)
+},
+{
+    "title": " Meu terceiro post",
+    "body": "Esse post é o terceito do blog",
+    "author": "Jezimiel Marcondes",
+    "created": datetime(2022,8,17)
+},
+]
 
 @app.route("/")
-def hello():
-    return "Hello Word"
-
-@app.route("/contatos") 
-def contato():
-    return"""<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>CSS experiment</title>
-    <style>
-      h1 {
-        color: blue;
-        background-color: yellow;
-        border: 1px solid black;
-      }
-
-      p {
-        color: red;
-      }
-    </style>
-  </head>
-  <body>
-    <h3>Hello World!</h3>
-    <p><h7>This is a CSS example</h7></p>
-  </body>
-</html>"""
-
+def index():
+    return render_template("index.html", posts=posts)
